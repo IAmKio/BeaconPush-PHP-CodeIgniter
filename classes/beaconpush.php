@@ -1,16 +1,21 @@
-<?php
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class BeaconPush {
 
     protected static $api_version = "1.0.0";
-    protected static $api_key = "5a30a673";
-    protected static $secret_key = "5177ea991cae1e5a07730b4dda0c7d2559696a72";
+    protected static $api_key = "0000"; // add your API key here, yo!
+    protected static $secret_key = "0000"; // and your secret key, ofc.
 
     protected static $channels = array();
+
+    function __construct() {
+		$this->ci =& get_instance();
+	}
 
     /**
      * Send the request
      */
+
     protected static function _request($method, $command, $arg=NULL, array $data=array(), $curl_timeout=30)
     {
         $request_url = 'http://api.beaconpush.com/'.BeaconPush::$api_version.'/'.BeaconPush::$api_key;
