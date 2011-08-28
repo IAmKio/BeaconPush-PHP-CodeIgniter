@@ -13,18 +13,18 @@ Download the classes/beaconpush.php file into your CodeIgniter installation's li
 You don't have to do this, but I would recommend in your config/autoload.php, adding 
 the Beacon Push library into the library array like so:
 
-  $autoload['libraries'] = array('database', 'template', 'beaconpush');
+	$autoload['libraries'] = array('database', 'template', 'beaconpush');
 
 So... y'know, you don't have to keep doing this in your controllers:
 
-  $this->load->library('beaconpush');
+	$this->load->library('beaconpush');
 
 ...unless you really want to.
 
 Once you've got that rocking and rolling (you'll know you've done something wrong if you get an error!) 
 you can just use this in your controllers:
 
-  $this->beaconpush->function_name(arg1, arg2, arg3, etc);
+	$this->beaconpush->function_name(arg1, arg2, arg3, etc);
   
 See below for the rest of the documentation!
 
@@ -45,8 +45,8 @@ string **embed** ( [ array *$options* = *array()* ] )
 
 #### Example #1:
 
-	$beaconpush->add_channel('theBestChannel');
-	$beaconpush->embed(array('log' => TRUE, 'user' => 'myCustomIdForUser'));
+	$this->beaconpush->add_channel('theBestChannel');
+	$this->beaconpush->embed(array('log' => TRUE, 'user' => 'myCustomIdForUser'));
 
 #### Example #1 returns:
 
@@ -58,8 +58,8 @@ string **embed** ( [ array *$options* = *array()* ] )
 
 #### Example #2:
 
-	$beaconpush->add_channel('theBestChannel');
-	$beaconpush->embed();
+	$this->beaconpush->add_channel('theBestChannel');
+	$this->beaconpush->embed();
 
 #### Example #2 returns:
 
@@ -77,7 +77,7 @@ void **add_channel** ( string *$channel* )
 
 #### Example #1:
 
-	$beaconpush->add_channel('theBestChannel');
+	$this->beaconpush->add_channel('theBestChannel');
 
 add_channels
 ------------
@@ -87,7 +87,7 @@ void **add_channels** ( array *$channels* )
 
 #### Example #1:
 
-	$beaconpush->add_channels( array('theBestChannel', 'foo') );
+	$this->beaconpush->add_channels( array('theBestChannel', 'foo') );
 
 send_to_channel
 ---------------
@@ -97,7 +97,7 @@ array **send_to_channel** ( string *$channel*, string *$event* [, array *$data* 
 
 #### Example #1:
 
-	$beaconpush->send_to_channel('theBestChannel', 'newMessage', array('message' => 'Hello everyone!'));
+	$this->beaconpush->send_to_channel('theBestChannel', 'newMessage', array('message' => 'Hello everyone!'));
 
 #### Example #1 returns:
 * We get back an array with data that Beaconpush.com returned
@@ -110,7 +110,7 @@ array **send_to_channels** ( array *$channels*, string *$event* [, array *$data*
 
 #### Example #1:
 
-	$beaconpush->send_to_channels(array('theBestChannel', 'foo'), 'newMessage', array('message' => 'Hello everyone!'));
+	$this->beaconpush->send_to_channels(array('theBestChannel', 'foo'), 'newMessage', array('message' => 'Hello everyone!'));
 
 #### Example #1 returns:
 * We get back an array containing arrays for each channel we sent the event to with data that Beaconpush.com returned (for each channel)
@@ -123,7 +123,7 @@ array **send_to_user** ( string *$user*, string *$event* [, array *$data* = *arr
 
 #### Example #1:
 
-	$beaconpush->send_to_user('theBestUser', 'newMessage', array('message' => 'Hello everyone!'));
+	$this->beaconpush->send_to_user('theBestUser', 'newMessage', array('message' => 'Hello everyone!'));
 
 #### Example #1 returns:
 * We get back an array with data that Beaconpush.com returned.
@@ -136,7 +136,7 @@ array **send_to_users** ( array *$users*, string *$event* [, array *$data* = *ar
 
 #### Example #1:
 
-	$beaconpush->send_to_users(array('theBestUser', 'bar'), 'newMessage', array('message' => 'Hello everyone!'));
+	$this->beaconpush->send_to_users(array('theBestUser', 'bar'), 'newMessage', array('message' => 'Hello everyone!'));
 
 #### Example #1 returns:
 * We get back an array containing arrays for each channel we sent the event to with data that Beaconpush.com returned (for each channel)
@@ -149,7 +149,7 @@ bool **send_to_users** ( string *$user* )
 
 #### Example #1:
 
-	$beaconpush->is_user_online('theBestUser');
+	$this->beaconpush->is_user_online('theBestUser');
 
 #### Example #1 returns:
 * Returns TRUE if the user is online, else FALSE
@@ -162,7 +162,7 @@ array **get_users_in_channel** ( string *$channel* )
 
 #### Example #1:
 
-	$beaconpush->get_users_in_channel('foo');
+	$this->beaconpush->get_users_in_channel('foo');
 
 #### Example #1 returns:
 * Returns an array of users.
@@ -175,7 +175,7 @@ array **get_users_in_channels** ( array *$channels* )
 
 #### Example #1:
 
-	$beaconpush->get_users_in_channels(array('theBestChannel', 'foo'));
+	$this->beaconpush->get_users_in_channels(array('theBestChannel', 'foo'));
 
 #### Example #1 returns:
 * Returns an array of users.
@@ -188,7 +188,7 @@ string **count_users_online** (  )
 
 #### Example #1:
 
-	$beaconpush->count_users_online();
+	$this->beaconpush->count_users_online();
 
 #### Example #1 returns:
 * Returns the number of users online
@@ -201,7 +201,7 @@ array **force_user_logout** ( string *$user* )
 
 #### Example #1:
 
-	$beaconpush->force_user_logout('theWorstUser');
+	$this->beaconpush->force_user_logout('theWorstUser');
 
 #### Example #1 returns:
 * WARNING: The return value for this function is not fully done. Currently it returns the response body Beaconpush gave us, but Beaconpush doesn't give us a response body for **force_user_logout**, only a result code. You can still use this function.
