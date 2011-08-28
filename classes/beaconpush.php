@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class BeaconPush {
+class beaconpush {
 
     protected static $api_version = "1.0.0";
     protected static $api_key = "0000"; // add your API key here, yo!
@@ -8,7 +8,7 @@ class BeaconPush {
 
     protected static $channels = array();
 
-    function __construct() {
+	function __construct() {
 		$this->ci =& get_instance();
 	}
 
@@ -18,11 +18,11 @@ class BeaconPush {
 
     protected static function _request($method, $command, $arg=NULL, array $data=array(), $curl_timeout=30)
     {
-        $request_url = 'http://api.beaconpush.com/'.BeaconPush::$api_version.'/'.BeaconPush::$api_key;
+        $request_url = 'http://api.beaconpush.com/'.beaconpush::$api_version.'/'.beaconpush::$api_key;
         $request_url = $request_url.'/'.strtolower($command).($arg ? '/'.$arg : '');
 
         $headers = array(
-            'X-Beacon-Secret-Key: '. BeaconPush::$secret_key,
+            'X-Beacon-Secret-Key: '. beaconpush::$secret_key,
         );
 
         $ch = curl_init($request_url);
@@ -82,7 +82,7 @@ class BeaconPush {
         }
 
         $r .= "<script type=\"text/javascript\">";
-        $r .= "Beacon.connect(\"".BeaconPush::$api_key."\",[\"".implode('","', BeaconPush::$channels)."\"]".$beacon_options.");";
+        $r .= "Beacon.connect(\"".beaconpush::$api_key."\",[\"".implode('","', beaconpush::$channels)."\"]".$beacon_options.");";
         $r .= "</script>";
 
         return $r;
@@ -91,53 +91,53 @@ class BeaconPush {
 
     public static function add_channel($channel)
     {
-        BeaconPush::$channels[] = $channel;
+        beaconpush::$channels[] = $channel;
     }
 
     public static function add_channels(array $channels)
     {
-        BeaconPush::$channels = array_merge(BeaconPush::$channels, $channels);
+        beaconpush::$channels = array_merge(beaconpush::$channels, $channels);
     }
 
 
 
     public static function send_to_channel($channel, $event, array $data = array())
     {
-        return BeaconPush::_request('POST', 'channels', $channel, array('name' => $event, 'data' => $data));
+        return beaconpush::_request('POST', 'channels', $channel, array('name' => $event, 'data' => $data));
     }
 
     public static function send_to_channels(array $channels, $event, array $data = array())
     {
         $r = array();
         foreach($channels as $channel)
-            $r[$channel] = BeaconPush::send_to_channel($channel, $event, $data);
+            $r[$channel] = beaconpush::send_to_channel($channel, $event, $data);
 
         return $r;
     }
 
     public static function send_to_user($user, $event, array $data = array())
     {
-        return BeaconPush::_request('POST', 'users', $user, array('name' => $event, 'data' => $data));
+        return beaconpush::_request('POST', 'users', $user, array('name' => $event, 'data' => $data));
     }
 
     public static function send_to_users(array $users, $event, array $data = array())
     {
         $r = array();
         foreach($users as $user)
-            $r[$user] = BeaconPush::send_to_user($user, $event, $data);
+            $r[$user] = beaconpush::send_to_user($user, $event, $data);
 
         return $r;
     }
 
     public static function is_user_online($user)
     {
-        $response = BeaconPush::_request('GET', 'users', $user);
+        $response = beaconpush::_request('GET', 'users', $user);
         return isset($response['online']);
     }
 
     public static function get_users_in_channel($channel)
     {
-        $response = BeaconPush::_request('GET', 'channels', $channel);
+        $response = beaconpush::_request('GET', 'channels', $channel);
         return $response['users'];
     }
 
@@ -145,20 +145,20 @@ class BeaconPush {
     {
         $users = array();
         foreach($channels as $channel)
-            $users = array_merge($users, BeaconPush::get_users_in_channel($channel));
+            $users = array_merge($users, beaconpush::get_users_in_channel($channel));
 
         return $users;
     }
 
     public static function count_users_online()
     {
-        $response = BeaconPush::_request('GET', 'users');
+        $response = beaconpush::_request('GET', 'users');
         return $response['online'];
     }
 
     public static function force_user_logout($user)
     {
-        return BeaconPush::_request('DELETE', 'users', $user);
+        return beaconpush::_request('DELETE', 'users', $user);
     }
 
 }
