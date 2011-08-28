@@ -8,10 +8,12 @@ Apply you API key and Secret key on row 6 and 7 in classes/beaconpush.php
 
 How to use it
 =============
-Download the classes/beaconpush.php file into your CodeIgniter installation's library.
+Download the **classes/beaconpush.php** file into your CodeIgniter installation's **application/library**.
 
-You don't have to do this, but I would recommend in your config/autoload.php, adding 
-the Beacon Push library into the library array like so:
+You should end up with **application/library/beaconpush.php**. If you didn't: *you're doing it wrong*.
+
+You don't have to do this, but I would recommend in your **config/autoload.php**, adding 
+the BeaconPush library into the library array like so:
 
 	$autoload['libraries'] = array('database', 'template', 'beaconpush');
 
@@ -21,7 +23,7 @@ So... y'know, you don't have to keep doing this in your controllers:
 
 ...unless you really want to.
 
-Once you've got that rocking and rolling (you'll know you've done something wrong if you get an error!) 
+Once you've got that rocking and rolling (you'll know you've done something wrong if you get an error) 
 you can just use this in your controllers:
 
 	$this->beaconpush->function_name(arg1, arg2, arg3, etc);
