@@ -8,37 +8,25 @@ Apply you API key and Secret key on row 6 and 7 in classes/beaconpush.php
 
 How to use it
 =============
-Simply include the file beaconpush.php in your site and it should be pretty straight forward from there.
+Download the classes/beaconpush.php file into your CodeIgniter installation's library.
 
-	require('classes/beaconpush.php');
-	$beaconpush = new BeaconPush();
-	
-	// Add user to the channel "theBestChannel"
-	$beaconpush >add_channel('theBestChannel');
-	
-	// Send an event (+data) to all users in the channel "theBestChannel"
-	$beaconpush >send_to_channel('theBestChannel', 'newMessage', array('message' => 'Hello world!'));
+You don't have to do this, but I would recommend in your config/autoload.php, adding 
+the Beacon Push library into the library array like so:
 
-In your html file, include the following line before your closing body tag
+  $autoload['libraries'] = array('database', 'template', 'beaconpush');
 
-	<?php print $beaconpush >embed(); ?>
+So... y'know, you don't have to keep doing this in your controllers:
 
-and after that, it should look something like this
+  $this->load->library('beaconpush');
 
-	<html>
-		<head>
-			<title>MyBestSite</title>
-		</head>
+...unless you really want to.
 
-		<body>
-			<h1>Welcome!</h1>
-			<p>Welcome to my best website!</p>
+Once you've got that rocking and rolling (you'll know you've done something wrong if you get an error!) 
+you can just use this in your controllers:
 
-			<?php print $beaconpush >embed(); ?>
-		</body>
-	</html>
-
-That's pretty much all you need to get started with BeaconPush-PHP!
+  $this->beaconpush->function_name(arg1, arg2, arg3, etc);
+  
+See below for the rest of the documentation!
 
 
 Documentation
